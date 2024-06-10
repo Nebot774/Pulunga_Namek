@@ -15,6 +15,21 @@
         android:paddingRight="25dp">
 
         <TextView
+            android:id="@+id/label_movemment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Movemment"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:background="#000000"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/teal_200"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center" />
+
+        <TextView
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -23,9 +38,25 @@
             android:textStyle="bold"
             android:background="#000000"
             android:backgroundTint="@color/teal_200"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/label_movemment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/label_accuracy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Accuracy"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:background="#000000"
+            android:backgroundTint="@color/teal_200"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
             android:textAlignment="center" />
 
         <TextView
@@ -37,10 +68,10 @@
             android:textStyle="bold"
             android:background="#000000"
             android:backgroundTint="@color/teal_200"
-            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintTop_toBottomOf="@id/label_accuracy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:textAlignment="center" />
 
         <TextView
@@ -62,17 +93,20 @@
             android:id="@+id/pokemon_list"
             android:layout_width="0dp"
             android:layout_height="400dp"
-            android:text="@{move.getPokemonsString()}"
-            android:textSize="24sp"
-            android:textStyle="italic"
+            android:layout_marginTop="8dp"
             android:background="#000000"
             android:backgroundTint="@color/teal_200"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/pokemon_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{move.getPokemonsString()}"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textAlignment="center" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pokemon_label"
+            app:layout_constraintVertical_bias="0.085" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
