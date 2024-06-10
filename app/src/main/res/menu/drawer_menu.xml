@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/moveDetailFragment"
+        android:icon="@android:drawable/ic_menu_directions"
+        android:title="Listado de Movimientos" />
+
+    <item
+        android:id="@+id/drawer2Fragment"
+        android:icon="@android:drawable/ic_menu_directions"
+        android:title="Listado de Items" />
+
+    <item
+        android:id="@+id/drawer3Fragment"
+        android:icon="@android:drawable/ic_menu_directions"
+        android:title="Item Aleatorio" />
+</menu>
