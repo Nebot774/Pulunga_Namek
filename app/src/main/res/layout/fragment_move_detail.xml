@@ -1,0 +1,78 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="move"
+            type="com.example.examenfinal.models.Move" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{move.name}"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:background="#000000"
+            android:backgroundTint="@color/teal_200"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/accuracy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{move.accuracy}"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:background="#000000"
+            android:backgroundTint="@color/teal_200"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/pokemon_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pokémon"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:background="#000000"
+            android:backgroundTint="@color/teal_200"
+            app:layout_constraintTop_toBottomOf="@id/accuracy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/pokemon_list"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:text="@{move.getPokemonsString()}"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:background="#000000"
+            android:backgroundTint="@color/teal_200"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/pokemon_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAlignment="center" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
