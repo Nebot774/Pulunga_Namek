@@ -14,9 +14,26 @@
             android:id="@+id/action_moveListRecyclerFragment_to_moveDetailFragment"
             app:destination="@id/moveDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/moveDetailFragment"
         android:name="com.example.examenfinal.MoveDetailFragment"
         android:label="fragment_move_detail"
-        tools:layout="@layout/fragment_move_detail" />
+        tools:layout="@layout/fragment_move_detail">
+    </fragment>
+
+    <fragment
+        android:id="@+id/itemListRecyclerFragment"
+        android:name="com.example.examenfinal.itemListRecyclerFragment"
+        android:label="fragment_drawer_2"
+        tools:layout="@layout/fragment_item_list_recycler">
+    </fragment>
+
+    <fragment
+        android:id="@+id/itemRandomFragment"
+        android:name="com.example.examenfinal.itemRandomFragment"
+        android:label="fragment_item_random"
+        tools:layout="@layout/fragment_item_random" />
+
+
 </navigation>

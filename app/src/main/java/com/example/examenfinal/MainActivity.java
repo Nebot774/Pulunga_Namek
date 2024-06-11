@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
@@ -30,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Configura el NavController
-        //NavController navController = Navigation.findNavController(this, R.id.fragment);
         NavController navController = ((NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment)).getNavController();
-
 
         // Configura el NavigationView para que use el NavController
         NavigationUI.setupWithNavController(binding.navView, navController);
@@ -41,11 +40,23 @@ public class MainActivity extends AppCompatActivity {
         binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                // Navega al destino correspondiente
-                NavigationUI.onNavDestinationSelected(item, navController);
                 // Cierra el cajón después de seleccionar un elemento
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
+
+                // Verifica el ID del elemento del menú seleccionado y navega al fragmento correspondiente
+                switch (item.getItemId()) {
+                    case R.id.moveListRecyclerFragment:
+                        navController.navigate(R.id.moveListRecyclerFragment);
+                        return true;
+                    case R.id.itemListRecyclerFragment:
+                        navController.navigate(R.id.itemListRecyclerFragment);
+                        return true;
+                    case R.id.itemRandomFragment:
+                        navController.navigate(R.id.itemRandomFragment);
+                        return true;
+                    default:
+                        return false;
+                }
             }
         });
 

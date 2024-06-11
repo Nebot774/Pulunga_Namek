@@ -10,8 +10,9 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="48dp"
+        android:layout_height="200dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         app:srcCompat="@drawable/pokebola" />
 
 </LinearLayout>
