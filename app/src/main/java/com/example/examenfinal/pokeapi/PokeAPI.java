@@ -66,5 +66,36 @@ public class PokeAPI {
         });
     }
 
+    // Método para obtener la lista de ítems
+    public static void getItemList(MutableLiveData<List<ItemListItem>> itemList) {
+        int limit = 20; // Valor predeterminado
+        int offset = 0; // Valor predeterminado
+
+        Log.d("PokeAPI", "Starting API call with limit: " + limit + " and offset: " + offset);
+
+        Call<ItemList> pokeCall = service.getItemList(limit, offset);
+        pokeCall.enqueue(new Callback<ItemList>() {
+            @Override
+            public void onResponse(@NonNull Call<ItemList> call, @NonNull Response<ItemList> response) {
+                if (response.isSuccessful()) {
+                    ItemList list = response.body();
+                    if (list != null) {
+                        Log.d("PokeAPI", "API call successful, received items: " + list.getResults().size());
+                        itemList.setValue(list.getResults());
+                    } else {
+                        Log.d("PokeAPI", "API call successful, but list is null");
+                    }
+                } else {
+                    Log.e("PokeAPI", "onResponse: API call failed with error: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ItemList> call, @NonNull Throwable t) {
+                Log.e("PokeAPI", "onFailure: API call failed with exception: " + t.getMessage());
+            }
+        });
+    }
+
 
 }
