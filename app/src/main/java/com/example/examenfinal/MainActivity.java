@@ -6,13 +6,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.examenfinal.databinding.ActivityMainBinding;
 import com.example.examenfinal.models.MoveListItem;
@@ -24,6 +27,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
+    private AppBarConfiguration mAppBarConfiguration;
+    private DrawerLayout drawerLayout;
     private ItemsViewModel itemsViewModel;
     private ActivityMainBinding binding;
 
@@ -33,24 +38,28 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-     // Inicializa el ViewModel para usarlo en caso de item aleatorio
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.moveListRecyclerFragment, R.id.itemListRecyclerFragment)
+                .setDrawerLayout(drawerLayout)
+                .build();
+
         itemsViewModel = new ViewModelProvider(this).get(ItemsViewModel.class);
 
-        // Configura el NavController
         NavController navController = ((NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment)).getNavController();
 
-        // Configura el NavigationView para que use el NavController
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // Configura un oyente para los elementos del menú
         binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                // Cierra el cajón después de seleccionar un elemento
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
-
-                // Verifica el ID del elemento del menú seleccionado y navega al fragmento correspondiente
                 switch (item.getItemId()) {
                     case R.id.moveListRecyclerFragment:
                         navController.navigate(R.id.moveListRecyclerFragment);
@@ -59,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(R.id.itemListRecyclerFragment);
                         return true;
                     case R.id.itemRandomFragment:
-                        itemsViewModel.selectRandom();//llamamos al metodo para seleccioanr un item random
+                        itemsViewModel.selectRandom();
                         navController.navigate(R.id.ItemDetailFragment);
                         return true;
                     default:
@@ -67,7 +76,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+
+
 }

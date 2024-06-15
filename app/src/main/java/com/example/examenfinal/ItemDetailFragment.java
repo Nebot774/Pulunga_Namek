@@ -4,8 +4,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +39,8 @@ public class ItemDetailFragment extends Fragment {
 
         itemViewModel = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class); // Cambiado para usar la misma instancia
 
+
+
         Log.d("ItemDetailFragment", "ViewModel initialized: " + (itemViewModel != null));
         return view;
     }
@@ -44,6 +49,10 @@ public class ItemDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d("ItemDetailFragment", "onViewCreated called");
+
+
+
+
 
         itemViewModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
             if (item != null) {

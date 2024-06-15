@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,7 +62,10 @@ public class ItemListRecyclerFragment extends Fragment {
         itemViewModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
             if (item != null) {
                 Log.d("ItemListRecyclerFragmen", "Received item details: " + item.toString());
-                navController.navigate(R.id.action_itemListRecyclerFragment_to_itemDetailFragment);
+                NavOptions navOptions = new NavOptions.Builder()
+                        .setPopUpTo(R.id.itemListRecyclerFragment, true)
+                        .build();
+                navController.navigate(R.id.action_itemListRecyclerFragment_to_itemDetailFragment, null, navOptions);
                 Log.d("ItemListRecyclerFragmen", "Navigating to ItemDetailFragment");
             } else {
                 Log.d("ItemListRecyclerFragmen", "Item details are null");
@@ -69,22 +73,10 @@ public class ItemListRecyclerFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("ItemListRecyclerFragmen", "onResume called");
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d("ItemListRecyclerFragmen", "onPause called");
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d("ItemListRecyclerFragmen", "onDestroyView called");
-    }
+
+
+
 }
 

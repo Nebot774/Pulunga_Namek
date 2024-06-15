@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/moveListRecyclerFragment">
+    app:startDestination="@id/itemListRecyclerFragment">
 
     <fragment
         android:id="@+id/moveListRecyclerFragment"
@@ -28,8 +28,10 @@
         android:label="fItem List Recycler"
         tools:layout="@layout/fragment_item_list_recycler">
         <action
-        android:id="@+id/action_itemListRecyclerFragment_to_itemDetailFragment"
-        app:destination="@id/ItemDetailFragment" />
+            android:id="@+id/action_itemListRecyclerFragment_to_itemDetailFragment"
+            app:destination="@id/ItemDetailFragment"
+            app:popUpTo="@id/itemListRecyclerFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
