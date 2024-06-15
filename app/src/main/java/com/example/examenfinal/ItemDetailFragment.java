@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 
 // ItemDetailFragment.java
 public class ItemDetailFragment extends Fragment {
@@ -35,6 +37,7 @@ public class ItemDetailFragment extends Fragment {
         itemCategory = view.findViewById(R.id.itemCategory);
         itemCost = view.findViewById(R.id.itemCost);
         itemEffect = view.findViewById(R.id.itemEffect);
+        itemImage = view.findViewById(R.id.itemImage);
         // itemImage = view.findViewById(R.id.itemImage);
 
         itemViewModel = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class); // Cambiado para usar la misma instancia
@@ -66,6 +69,19 @@ public class ItemDetailFragment extends Fragment {
                 Log.d("ItemDetailFragment", "Item details are null");
             }
         });
+
+        itemViewModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
+            if (item != null) {
+                // ...
+                Glide.with(this)
+                        .load(item.getUrl())
+                        .into(itemImage);
+            } else {
+                Log.d("ItemDetailFragment", "Item details are null");
+            }
+        });
+
+
     }
 
 

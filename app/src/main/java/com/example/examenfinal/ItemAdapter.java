@@ -4,7 +4,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +45,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         ItemListDetails item = itemList.get(position);
         String itemName = item.getName();
         holder.bind(itemName);
+        Glide.with(holder.itemView)
+                .load(item.getUrl())
+                .into(holder.itemImage);
         holder.itemView.setOnClickListener(v -> {
             Log.d("ItemAdapter", "Item clicked: " + itemName);
             itemsViewModel.select(item);
@@ -60,10 +65,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView itemName;
+        private ImageView itemImage; // Añade esta línea
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.itemName);
+            itemImage = itemView.findViewById(R.id.itemImage); // Añade esta línea
         }
 
         public void bind(String name) {
@@ -76,4 +83,3 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         notifyDataSetChanged();
     }
 }
-
