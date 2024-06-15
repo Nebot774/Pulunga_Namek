@@ -1,17 +1,14 @@
 package com.example.examenfinal.models;
 
 import java.util.ArrayList;
-import java.util.List;
 
+// Clase que representa una lista de detalles de elementos
 public class ItemList {
-    private List<ItemListItem> results;
+    // Lista de detalles de elementos
+    private ArrayList<ItemListDetails> results;
 
-    public List<ItemListItem> getResults() {
+    // Método getter para obtener la lista de detalles de elementos
+    public ArrayList<ItemListDetails> getResults() {
         return results;
     }
-
-    public void setResults(List<ItemListItem> results) {
-        this.results = results;
-    }
 }
-

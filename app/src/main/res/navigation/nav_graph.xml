@@ -24,9 +24,12 @@
 
     <fragment
         android:id="@+id/itemListRecyclerFragment"
-        android:name="com.example.examenfinal.itemListRecyclerFragment"
-        android:label="fragment_drawer_2"
+        android:name="com.example.examenfinal.ItemListRecyclerFragment"
+        android:label="fItem List Recycler"
         tools:layout="@layout/fragment_item_list_recycler">
+        <action
+        android:id="@+id/action_itemListRecyclerFragment_to_itemDetailFragment"
+        app:destination="@id/ItemDetailFragment" />
     </fragment>
 
     <fragment
@@ -34,6 +37,13 @@
         android:name="com.example.examenfinal.itemRandomFragment"
         android:label="fragment_item_random"
         tools:layout="@layout/fragment_item_random" />
+
+
+    <fragment
+        android:id="@+id/ItemDetailFragment"
+        android:name="com.example.examenfinal.ItemDetailFragment"
+        android:label="fragment_item_detail"
+        tools:layout="@layout/fragment_item_detail" />
 
 
 </navigation>

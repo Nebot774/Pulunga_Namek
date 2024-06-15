@@ -21,6 +21,54 @@ public class PokeAPI {
             .build();
     private static PokeAPIService service = retrofit.create(PokeAPIService.class);
 
+
+    public static void getItemList(MutableLiveData<List<ItemListDetails>> listItems) {
+        Call<ItemList> pokeCall = service.getItemList(100, 0);
+        pokeCall.enqueue(new Callback<ItemList>() {
+            @Override
+            public void onResponse(@NonNull Call<ItemList> call, @NonNull Response<ItemList> response) {
+                if (response.isSuccessful()) {
+                    ItemList list = response.body();
+                    if (list != null) {
+                        listItems.setValue(list.getResults());
+                    }
+
+                } else {
+                    Log.e("QWERTY", " onResponse: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ItemList> call, @NonNull Throwable t) {
+                Log.e("QWERTY", " onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public static void getItem(String name, MutableLiveData<Item> item) {
+        Call<Item> pokeCall = service.getItemByName(name);
+        pokeCall.enqueue(new Callback<Item>() {
+            @Override
+            public void onResponse(@NonNull Call<Item> call, @NonNull Response<Item> response) {
+                if (response.isSuccessful()) {
+                    Item obj = response.body();
+                    if (obj != null) {
+                        item.setValue(obj);
+                        Log.d("PokeAPI", "Successfully fetched item: " + obj.getName());
+                    }
+                } else {
+                    Log.e("PokeAPI", " onResponse: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Item> call, @NonNull Throwable t) {
+                Log.e("PokeAPI", " onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+
     public static void getMoveList(MutableLiveData<List<MoveListItem>> moveList){
         Call<MoveList> pokeCall = service.getMoveList(844, 0);
         pokeCall.enqueue(new Callback<MoveList>() {
@@ -66,36 +114,14 @@ public class PokeAPI {
         });
     }
 
-    // Método para obtener la lista de ítems
-    public static void getItemList(MutableLiveData<List<ItemListItem>> itemList) {
-        int limit = 20; // Valor predeterminado
-        int offset = 0; // Valor predeterminado
 
-        Log.d("PokeAPI", "Starting API call with limit: " + limit + " and offset: " + offset);
 
-        Call<ItemList> pokeCall = service.getItemList(limit, offset);
-        pokeCall.enqueue(new Callback<ItemList>() {
-            @Override
-            public void onResponse(@NonNull Call<ItemList> call, @NonNull Response<ItemList> response) {
-                if (response.isSuccessful()) {
-                    ItemList list = response.body();
-                    if (list != null) {
-                        Log.d("PokeAPI", "API call successful, received items: " + list.getResults().size());
-                        itemList.setValue(list.getResults());
-                    } else {
-                        Log.d("PokeAPI", "API call successful, but list is null");
-                    }
-                } else {
-                    Log.e("PokeAPI", "onResponse: API call failed with error: " + response.errorBody());
-                }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<ItemList> call, @NonNull Throwable t) {
-                Log.e("PokeAPI", "onFailure: API call failed with exception: " + t.getMessage());
-            }
-        });
-    }
+
+
+
+
+
 
 
 }

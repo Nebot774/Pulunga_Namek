@@ -16,10 +16,14 @@ public interface PokeAPIService {
     Call<MoveList> getMoveList(@Query("limit") int limit, @Query("offset") int offset);
 
     // Añadir método para obtener un ítem por ID
-    //@GET("item/{id}")
-    //Call<Item> getItemById(@Path("id") String id);
+    @GET("item/{name}")
+    Call<Item> getItemByName(@Path("name") String id);
 
-    // Añadir método para obtener la lista de ítems
+
     @GET("item")
     Call<ItemList> getItemList(@Query("limit") int limit, @Query("offset") int offset);
+
+
+
+
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -22,6 +23,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private ItemsViewModel itemsViewModel;
     private ActivityMainBinding binding;
 
     @Override
@@ -29,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+     // Inicializa el ViewModel para usarlo en caso de item aleatorio
+        itemsViewModel = new ViewModelProvider(this).get(ItemsViewModel.class);
 
         // Configura el NavController
         NavController navController = ((NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment)).getNavController();
@@ -52,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(R.id.itemListRecyclerFragment);
                         return true;
                     case R.id.itemRandomFragment:
-                        navController.navigate(R.id.itemRandomFragment);
+                        itemsViewModel.selectRandom();//llamamos al metodo para seleccioanr un item random
+                        navController.navigate(R.id.ItemDetailFragment);
                         return true;
                     default:
                         return false;
@@ -60,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MutableLiveData<List<MoveListItem>> moveList = new MutableLiveData<>();
-        PokeAPI.getMoveList(moveList);
+
     }
 }
